@@ -1,0 +1,30 @@
+[package]
+name = "util"
+version = "0.1.0"
+authors = ["mkoakintomiwa <ibnakintomiwa@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+openssl = { version = "0.10", features = ["vendored"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version="1.0", features = ["preserve_order"] }
+im = "15.0.0"
+hyper = "0.13.5"
+hyper-tls = "0.4.3"
+rand = "0.7"
+colored = "2.0.0"
+glob = "0.3.0"
+base64 = "0.12.3"
+indexmap = "1.6.0"
+json = "*"
+sha2 = "0.9.4"
+subprocess = "0.2.7"
+curl = "0.4.37"
+rustyline = "8.2.0"
+rustyline-derive = "0.4.0"
+dirs = "3.0.2"
+tinytemplate = "1.1"
+rpassword = "7.3.1"
+eyre = "0.6.8"
