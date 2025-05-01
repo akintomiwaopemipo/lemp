@@ -14,7 +14,7 @@ impl Phpmyadmin{
         shell_exec(&format!("wget files.phpmyadmin.net/phpMyAdmin/{lastest_phpmyadmin_version}/phpMyAdmin-{lastest_phpmyadmin_version}-all-languages.zip -q && mv phpMyAdmin-{lastest_phpmyadmin_version}-all-languages.zip /usr/share/phpMyAdmin-{lastest_phpmyadmin_version}-all-languages.zip && unzip -qq /usr/share/phpMyAdmin-{lastest_phpmyadmin_version}-all-languages.zip -d /usr/share && mv /usr/share/phpMyAdmin-{lastest_phpmyadmin_version}-all-languages /usr/share/phpmyadmin  && rm -rf /usr/share/phpMyAdmin-{lastest_phpmyadmin_version}-all-languages.zip"));
 
 
-        file_put_contents("phpmyadmin.conf", include_str!("../../templates/phpmyadmin/phpmyadmin.conf"));
+        file_put_contents("phpmyadmin.conf", &format!(include_str!("../../templates/phpmyadmin/phpmyadmin.conf")));
 
         shell_exec("mv phpmyadmin.conf /etc/nginx/sites-available/phpmyadmin.conf");
 
