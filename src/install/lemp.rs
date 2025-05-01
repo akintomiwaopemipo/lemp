@@ -1,5 +1,5 @@
 use app::{nginx::Nginx, mariadb::Mariadb, php::PHP, phpmyadmin::Phpmyadmin};
-use util::{shell_exec_as_string, read_and_confirm_password};
+use util::{shell_exec_as_string, read_and_confirm_password, command_exists, directory_exists};
 use crate::install;
 use std::process::exit;
 
@@ -22,7 +22,13 @@ pub fn action(args: install::Args){
     
     println!("Installing nginx");
     println!();
-    Nginx::install();
+    
+    if !command_exists("nginx"){
+        Nginx::install();
+    }else{
+        println!("Nginx already installed");
+    }
+    
     println!();
     println!();
     println!();
@@ -30,7 +36,13 @@ pub fn action(args: install::Args){
 
     println!("Installing Mariadb");
     println!();
-    Mariadb::install(&root_password);
+
+    if !command_exists("mysql"){
+        Mariadb::install(&root_password);
+    }else{
+        println!("Mariadb/MySql already installed");
+    }
+
     println!();
     println!();
     println!();
@@ -38,7 +50,13 @@ pub fn action(args: install::Args){
 
     println!("Installing PHP");
     println!();
-    PHP::install();
+    
+    if !command_exists("php"){
+        PHP::install();
+    }else{
+        println!("PHP already installed");
+    }
+
     println!();
     println!();
     println!();
@@ -46,7 +64,13 @@ pub fn action(args: install::Args){
 
     println!("Installing PhpMyAdmin");
     println!();
-    Phpmyadmin::install();
+    
+    if !directory_exists("/usr/share/phpmyadmin"){
+        Phpmyadmin::install();
+    }else{
+        println!("PhpMyAdmin already installed")
+    }
+    
     println!();
     println!();
 
