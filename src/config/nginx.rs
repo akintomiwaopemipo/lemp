@@ -10,7 +10,7 @@ pub fn action(_args: Args){
 
     util::shell_exec("sudo systemctl restart nginx");
 
-    println!("Restarted apache service");
+    println!("Restarted nginx service");
 }
 
 
