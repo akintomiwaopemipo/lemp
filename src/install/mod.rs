@@ -44,7 +44,7 @@ pub fn action(args: Args){
 
     } else{
         
-        lemp::install(args);
+        lemp::action(args);
 
     }
 
