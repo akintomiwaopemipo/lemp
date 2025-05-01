@@ -6,11 +6,11 @@ impl PHP{
 
     pub fn configure(){
         
-        awk_update("upload_max_filesize", "512M", "/etc/php/8.2/nginx/php.ini", Some(";"), Some(true));
+        awk_update("upload_max_filesize", "512M", "/etc/php/8.2/fpm/php.ini", Some(";"), Some(true));
 
-        awk_update("post_max_size", "512M", "/etc/php/8.2/nginx/php.ini", Some(";"), Some(true));
+        awk_update("post_max_size", "512M", "/etc/php/8.2/fpm/php.ini", Some(";"), Some(true));
 
-        awk_update("memory_limit", "512M", "/etc/php/8.2/nginx/php.ini", Some(";"), Some(true));
+        awk_update("memory_limit", "512M", "/etc/php/8.2/fpm/php.ini", Some(";"), Some(true));
     
         shell_exec("sudo systemctl restart nginx");
         
