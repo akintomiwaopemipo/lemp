@@ -1,4 +1,4 @@
-use app::{apache2::Apache2, mariadb::Mariadb, php::PHP};
+use app::{nginx::Nginx, mariadb::Mariadb, php::PHP};
 use util::read_and_confirm_password;
 
 
@@ -16,7 +16,7 @@ pub fn action(args: Args){
 
     println!();
     
-    Apache2::install();
+    Nginx::install();
 
     Mariadb::install(&root_password);
 

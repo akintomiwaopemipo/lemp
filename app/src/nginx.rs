@@ -1,8 +1,8 @@
 use util::shell_exec;
 
-pub struct Apache2;
+pub struct Nginx;
 
-impl Apache2{
+impl Nginx{
 
     pub fn install(){
 
