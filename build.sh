@@ -10,7 +10,7 @@ echo
 
 if [ -f "target/release/$APP_NAME" ]; then
     rm -rf "/usr/local/bin/$APP_NAME"
-    cp "target/release/$APP_NAME" "/usr/local/bin"
+    sudo cp "target/release/$APP_NAME" "/usr/local/bin"
     echo "Copied to /usr/local/bin"
 else
     echo "App binary does not exist"
