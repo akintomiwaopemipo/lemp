@@ -8,6 +8,9 @@ mod phpmyadmin;
 pub struct Args {
     #[command(subcommand)]
     pub command: Option<Commands>,
+
+    #[arg(short = 'p', long)]
+    root_password: Option<String>
 }
 
 
