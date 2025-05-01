@@ -8,7 +8,7 @@ mod install;
 
 
 #[derive(Parser)]
-#[command(name = "wpanel", version, about = "Manage server resources", long_about = None)]
+#[command(name = "lemp", version, about = "Manage server resources", long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,

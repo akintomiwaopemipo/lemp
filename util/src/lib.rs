@@ -532,13 +532,6 @@ pub fn change_current_unix_user_password(password: &str){
 }
 
 
-pub fn change_wfm_password(_user: &str, _password: &str){
-    // let mut settings = object!{};
-    // settings["auth_users"][user] = fetch_url(&format!("api.wpanel.dev/password-hash?password={}",password)).into();
-
-    // file_put_contents(&format!("/home/{}/public_html/file-manager/settings.json",user),json::stringify_pretty(settings, 4).as_str());
-}
-
 
 pub fn stdin_lest_is_none(stdin_title: &str, option: Option<&str>)->String{
     let response: String;
