@@ -18,14 +18,14 @@ pub fn action(args: Args){
     let domain_name = args.domain;
     let user = args.user;
     
-    let virtual_host = format!(include_str!("../../templates/apache/virtual-host.conf"), domain_name=domain_name, user=user);
+    let server_block = format!(include_str!("../../templates/nginx/server-block.conf"), domain_name=domain_name, user=user);
 
-    util::file_put_contents(&format!("/etc/apache2/sites-available/{}.conf",domain_name), &virtual_host);
+    util::file_put_contents(&format!("/etc/nginx/sites-available/{domain_name}.conf"), &server_block);
 
-    util::shell_exec(&format!("sudo a2ensite {}.conf",domain_name));
+    util::shell_exec(&format!("sudo ln -s /etc/nginx/sites-available/{domain_name} /etc/nginx/sites-enabled/"));
 
-    util::shell_exec("sudo systemctl restart apache2");
-    println!("Restarted apache service");
+    util::shell_exec("sudo systemctl restart nginx");
+    println!("Restarted nginx service");
 }
 
 
