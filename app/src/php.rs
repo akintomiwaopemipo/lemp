@@ -14,7 +14,7 @@ impl PHP{
     
         shell_exec("sudo systemctl restart nginx");
         
-        println!("Restarted apache service");
+        println!("Restarted nginx service");
 
     }
 

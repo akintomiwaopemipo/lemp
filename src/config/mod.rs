@@ -19,7 +19,7 @@ pub enum Commands {
     #[command(about = "Configure mysql settings and restart the mysql service")]
     Mysql(mysql::Args),
 
-    #[command(about = "Configure apache settings and restart the nginx service")]
+    #[command(about = "Configure nginx settings and restart the nginx service")]
     Nginx(nginx::Args),
 
     #[command(about = "Configure php settings and restart the nginx service")]

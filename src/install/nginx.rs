@@ -1,4 +1,4 @@
-use app::apache2::Apache2;
+use app::nginx::Nginx;
 
 
 #[derive(clap::Args)]
@@ -9,7 +9,7 @@ pub fn action(_args: Args){
 
     println!();
 
-    Apache2::install();
+    Nginx::install();
 
     println!();
 
