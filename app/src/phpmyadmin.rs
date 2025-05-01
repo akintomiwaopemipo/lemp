@@ -23,6 +23,10 @@ impl Phpmyadmin{
         shell_exec("sudo ufw allow 7070");
 
         shell_exec("sudo systemctl restart nginx");
+
+        println!();
+
+        println!("Restarted nginx service");
         
     }
 
