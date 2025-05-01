@@ -16,9 +16,9 @@ pub struct Args{
 pub fn action(args: Args){
 
     let domain_name = args.domain;
-    let user = args.user;
+    let _user = args.user;
     
-    let server_block = format!(include_str!("../../templates/nginx/server-block.conf"), domain_name=domain_name, user=user);
+    let server_block = format!(include_str!("../../templates/nginx/server-block.conf"), domain_name=domain_name);
 
     util::file_put_contents(&format!("/etc/nginx/sites-available/{domain_name}.conf"), &server_block);
 
