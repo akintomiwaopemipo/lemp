@@ -628,3 +628,9 @@ pub fn read_and_confirm_password(prompt_message: &str) -> String{
 
     password
 }
+
+
+
+pub fn command_exists(command: &str) -> bool{
+    !shell_exec_as_string(&format!("which {command}")).trim().is_empty()
+}
