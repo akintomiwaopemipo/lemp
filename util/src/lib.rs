@@ -615,8 +615,8 @@ pub fn read_password() -> String{
 }
 
 
-pub fn read_and_confirm_password() -> String{
-    let password = rpassword::prompt_password("Password: ".bright_cyan()).unwrap();
+pub fn read_and_confirm_password(prompt_message: &str) -> String{
+    let password = rpassword::prompt_password(&format!("{prompt_message}: ").bright_cyan()).unwrap();
     let confirm_password = rpassword::prompt_password("Confirm password: ".bright_cyan()).unwrap();
 
     if password != confirm_password{

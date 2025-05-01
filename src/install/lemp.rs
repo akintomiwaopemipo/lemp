@@ -16,7 +16,7 @@ pub fn action(args: install::Args){
     }
 
         
-    let root_password = args.root_password.unwrap_or_else(|| read_and_confirm_password());
+    let root_password = args.root_password.unwrap_or_else(|| read_and_confirm_password("MariaDb root password"));
 
     println!();
     
