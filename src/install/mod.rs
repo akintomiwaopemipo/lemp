@@ -1,4 +1,5 @@
 mod lemp;
+mod nginx;
 mod php;
 mod mariadb;
 mod phpmyadmin;
@@ -18,6 +19,9 @@ pub struct Args {
 #[derive(clap::Subcommand)]
 pub enum Commands {
 
+    #[command(about = "Install nginx")]
+    Nginx(nginx::Args),
+
     #[command(about = "Install phpMyAdmin at port 7070")]
     Phpmyadmin(phpmyadmin::Args),
 
@@ -36,6 +40,8 @@ pub fn action(args: Args){
     if let Some(cmd) = args.command{
 
         match cmd{
+
+            Commands::Nginx(args) => nginx::action(args),
             
             Commands::Phpmyadmin(args) => phpmyadmin::action(args),
     
