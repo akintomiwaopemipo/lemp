@@ -1,4 +1,4 @@
-use util::shell_exec;
+use util::{file_put_contents, shell_exec};
 
 pub struct Nginx;
 
@@ -10,7 +10,11 @@ impl Nginx{
 
         shell_exec("sudo apt install ufw");
         
-        shell_exec("sudo ufw allow 'Nginx HTTP'");
+        shell_exec("sudo ufw allow 'Nginx Full'");
+
+        file_put_contents("ssl-params.conf", include_str!("../../templates/nginx/ssl-params.conf"));
+
+        shell_exec("mv ssl-params.conf /etc/nginx/snippets/ssl-params.conf");
 
         shell_exec("sudo ufw status");
 
@@ -24,9 +28,9 @@ impl Nginx{
 
         shell_exec("mkdir -p /etc/ssl/private/ && sudo openssl req -x509 -nodes -days 182500 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj '/C=NG/ST=Oyo/L=Ibadan/O=lemp/OU=Org/CN=localhost'");
 
-        shell_exec("sudo apt install certbot python3-certbot-apache -y");
+        shell_exec("sudo apt install certbot -y");
 
-        shell_exec("sudo systemctl reload nginx");
+        shell_exec("sudo systemctl restart nginx");
 
     }
 
