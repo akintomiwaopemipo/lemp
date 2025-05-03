@@ -1,5 +1,5 @@
 use app::{mariadb::Mariadb, nginx::Nginx};
-use util::{change_unix_user_password, file_put_contents, read_and_confirm_password, shell_exec};
+use util::{change_unix_user_password, ensure_strong_password, file_put_contents, read_and_confirm_password, shell_exec};
 
 #[derive(clap::Args)]
 pub struct Args{
@@ -35,6 +35,8 @@ pub fn action(args: Args){
         }else{
             read_and_confirm_password(&format!("Password for {user}"))
         };
+
+        ensure_strong_password(&password);
 
         println!();
 
