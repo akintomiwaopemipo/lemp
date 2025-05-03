@@ -34,4 +34,10 @@ impl Nginx{
 
     }
 
+
+    pub fn restart(){
+        shell_exec("sudo systemctl restart nginx");
+        println!("Restarted nginx service");
+    }
+
 }
