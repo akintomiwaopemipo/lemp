@@ -1,8 +1,34 @@
-use util::{file_put_contents, shell_exec};
+use std::path::Path;
+
+use util::{file_put_contents, shell_exec, shell_exec_as_string, user_home_dir};
 
 pub struct Mariadb;
 
 impl Mariadb{
+
+
+    pub fn configure(user: &str, password: &str, ssh_user: Option<&str>){
+
+        let ssh_user = ssh_user.unwrap_or(user);
+        
+        shell_exec_as_string(&format!(r#"mysql --execute 'CREATE USER "{user}"@"localhost" IDENTIFIED BY "{password}";'"#));
+
+        shell_exec_as_string(&format!(r#"mysql --execute 'GRANT ALL PRIVILEGES ON `{user}\_%` . * TO "{user}"@"localhost";'"#));
+
+        shell_exec_as_string(&format!(r#"mysql --execute 'GRANT ALL PRIVILEGES ON `{user}` . * TO "{user}"@"localhost"; FLUSH PRIVILEGES;'"#));
+
+        let home_dir = user_home_dir(&ssh_user);
+        let mysql_cnf_file = Path::new(&home_dir).join(".my.cnf").into_os_string().into_string().unwrap();
+
+        file_put_contents(&mysql_cnf_file,&format!(include_str!("../../templates/mysql/client.cnf"),user,password));
+
+        shell_exec(&format!("chown {ssh_user} {mysql_cnf_file}"));
+
+        println!("Created MariaDB account for user"); 
+    
+    }
+
+
 
     pub fn install(root_password: &str){
 
