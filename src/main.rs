@@ -37,9 +37,9 @@ enum Commands {
 #[tokio::main]
 async fn main() {
 
-    require_sudo();
-
     let cli = Cli::parse();
+
+    require_sudo();
 
     match cli.command{
 
