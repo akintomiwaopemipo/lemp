@@ -78,7 +78,7 @@ pub fn action(args: Args){
 
     shell_exec(&format!("sudo ln -s /etc/nginx/sites-available/{domain_name}.conf /etc/nginx/sites-enabled/"));
 
-    shell_exec(&format!(r#"mkdir -p "/var/www/{domain_name}" && chown -R {user}:{user} "/var/www/{domain_name}""#));
+    shell_exec(&format!(r#"mkdir -p "{root_directory}" && chown -R {user}:{user} "{root_directory}""#));
 
     shell_exec("sudo systemctl restart php8.2-fpm");
     println!("Restarted php8.2-fpm service");
