@@ -1,3 +1,4 @@
+use app::require_sudo;
 use clap::{Parser, Subcommand};
 
 
@@ -35,6 +36,8 @@ enum Commands {
 
 #[tokio::main]
 async fn main() {
+
+    require_sudo();
 
     let cli = Cli::parse();
 

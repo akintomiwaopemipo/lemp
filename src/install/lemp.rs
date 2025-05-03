@@ -1,20 +1,11 @@
 use app::{nginx::Nginx, mariadb::Mariadb, php::PHP, phpmyadmin::Phpmyadmin};
-use util::{shell_exec_as_string, read_and_confirm_password, command_exists, directory_exists};
+use util::{read_and_confirm_password, command_exists, directory_exists};
 use crate::install;
-use std::process::exit;
 
 
 
 
 pub fn action(args: install::Args){
-
-    let whoami = shell_exec_as_string("whoami");
-
-    if whoami != "root"{
-        println!("Permission denied. Please run this command with sudo.");
-        exit(-1);
-    }
-
         
     let root_password = args.root_password.unwrap_or_else(|| read_and_confirm_password("MariaDb root password"));
 
