@@ -6,9 +6,9 @@ impl Nginx{
 
     pub fn install(){
 
-        shell_exec("sudo apt install nginx -y");
+        shell_exec("sudo apt-get install nginx -y");
 
-        shell_exec("sudo apt install ufw");
+        shell_exec("sudo apt-get install ufw");
         
         shell_exec("sudo ufw allow 'Nginx Full'");
 
@@ -28,7 +28,7 @@ impl Nginx{
 
         shell_exec("mkdir -p /etc/ssl/private/ && sudo openssl req -x509 -nodes -days 182500 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj '/C=NG/ST=Oyo/L=Ibadan/O=lemp/OU=Org/CN=localhost'");
 
-        shell_exec("sudo apt install certbot -y");
+        shell_exec("sudo apt-get install certbot -y");
 
         shell_exec("sudo systemctl restart nginx");
 

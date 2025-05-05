@@ -32,15 +32,15 @@ impl Mariadb{
 
     pub fn install(root_password: &str){
 
-        shell_exec("sudo apt install mariadb-server -y");
+        shell_exec("sudo apt-get install mariadb-server -y");
 
         shell_exec("systemctl start mariadb");
 
         shell_exec("sudo systemctl enable mariadb");
 
-        shell_exec("sudo apt install dos2unix -y");
+        shell_exec("sudo apt-get install dos2unix -y");
 
-        shell_exec("sudo apt install expect -y");
+        shell_exec("sudo apt-get install expect -y");
 
         file_put_contents("mysql_secure.sh", include_str!("../../templates/bash/mysql_secure.sh"));
 
