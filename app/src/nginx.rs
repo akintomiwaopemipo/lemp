@@ -8,7 +8,7 @@ impl Nginx{
 
         shell_exec("sudo apt-get install nginx -y");
 
-        shell_exec("sudo apt-get install ufw");
+        shell_exec("sudo apt-get install ufw -y");
         
         shell_exec("sudo ufw allow 'Nginx Full'");
 
