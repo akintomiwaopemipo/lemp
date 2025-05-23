@@ -637,17 +637,21 @@ pub fn command_exists(command: &str) -> bool{
 
 
 pub fn ensure_strong_password(password: &str){
-    
-    let escaped_password = password.replace(r#"""#, r#"\""#);
-    
-    let password_check_response = shell_exec_as_string(&format!(r#"echo "{escaped_password}" | cracklib-check"#));
 
-    if password_check_response != format!("{password}: OK"){
+    if command_exists("cracklib-check"){
+    
+        let escaped_password = password.replace(r#"""#, r#"\""#);
         
-        println!("Bad password. Password not strong enough.\nYou can generate a strong password using:\nopenssl rand -base64 21");
+        let password_check_response = shell_exec_as_string(&format!(r#"echo "{escaped_password}" | cracklib-check"#));
 
-        exit(1);
+        if password_check_response != format!("{password}: OK"){
+            
+            println!("Bad password. Password not strong enough.\nYou can generate a strong password using:\nopenssl rand -base64 21");
 
+            exit(1);
+
+        }
+        
     }
 
 
