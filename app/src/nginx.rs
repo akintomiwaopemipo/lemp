@@ -30,6 +30,8 @@ impl Nginx{
 
         shell_exec("sudo apt-get install certbot -y");
 
+        shell_exec("sudo apt-get install python3-certbot-nginx -y");
+
         shell_exec("sudo systemctl restart nginx");
 
     }
