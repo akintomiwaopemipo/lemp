@@ -1,6 +1,6 @@
 [package]
 name = "lemp"
-version = "1.4.3"
+version = "1.4.4"
 authors = ["Akintomiwa <ibnakintomiwa@gmail.com>"]
 edition = "2018"
 
