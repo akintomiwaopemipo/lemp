@@ -37,6 +37,13 @@ impl Nginx{
     }
 
 
+    pub fn configure(){
+        println!("Writing /etc/nginx/conf.d/lemp.conf");
+        file_put_contents("/etc/nginx/conf.d/lemp.conf", include_str!("../../templates/nginx/config.conf"));
+        Self::restart();
+    }
+
+
     pub fn restart(){
         shell_exec("sudo systemctl restart nginx");
         println!("Restarted nginx service");
