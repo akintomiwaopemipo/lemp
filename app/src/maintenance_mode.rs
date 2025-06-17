@@ -1,5 +1,3 @@
-use std::process::exit;
-
 use util::{file_exists, file_put_contents, shell_exec};
 
 use crate::nginx::Nginx;
@@ -40,7 +38,7 @@ impl MaintenanceMode{
             shell_exec(&format!("mv '{config_file}' '{config_backup_file}'"));
         }else{
             println!("Backup file {config_backup_file} already exists");
-            exit(1);
+            return;
         }
 
         let ssl_certificate = format!("/etc/letsencrypt/live/{domain_name}/fullchain.pem");
@@ -71,7 +69,7 @@ impl MaintenanceMode{
 
         if !file_exists(&config_backup_file){
             println!("Maintenance mode backup file does not exists");
-            exit(1);
+            return;
         }
 
         shell_exec(&format!("mv '{config_backup_file}' '{config_file}'"));

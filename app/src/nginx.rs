@@ -1,3 +1,6 @@
+use std::fs;
+
+use regex::Regex;
 use util::{file_exists, file_put_contents, shell_exec};
 
 use crate::maintenance_mode::MaintenanceMode;
@@ -68,6 +71,47 @@ impl Nginx{
     pub fn restart(){
         println!("Restarting nginx service");
         shell_exec("sudo systemctl restart nginx");
+    }
+
+
+    pub fn enabled_domains() -> Vec<String> {
+        let sites_enabled_path = "/etc/nginx/sites-enabled";
+        let mut domains = Vec::new();
+
+        // Regex to capture domains from `server_name` line
+        let re = Regex::new(r"(?m)^\s*server_name\s+([^;]+);").unwrap();
+
+        if let Ok(entries) = fs::read_dir(sites_enabled_path) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.is_file() {
+                    if let Ok(contents) = fs::read_to_string(&path) {
+                        for cap in re.captures_iter(&contents) {
+                            let names = cap[1]
+                                .split_whitespace()
+                                .map(|s| s.to_string());
+                            domains.extend(names);
+                        }
+                    }
+                }
+            }
+        }
+
+        let mut lemp_domains = Vec::new();
+
+        for domain in domains{
+            
+            if 
+                !lemp_domains.contains(&domain.replace("www.", "")) && 
+                domain != "_" &&
+                !domain.contains("phpmyadmin.com")
+            {
+                lemp_domains.push(domain);
+            }
+        }
+
+        lemp_domains
+        
     }
 
 }

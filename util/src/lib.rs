@@ -656,3 +656,12 @@ pub fn ensure_strong_password(password: &str){
 
 
 }
+
+
+
+pub fn print_header_block(title: &str){
+    println!();
+    println!("### ----------------------------------------------------------");
+    println!("###              {title}");
+    println!("### ----------------------------------------------------------");
+}
