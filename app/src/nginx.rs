@@ -1,4 +1,4 @@
-use util::{file_put_contents, shell_exec};
+use util::{file_exists, file_put_contents, shell_exec};
 
 pub struct Nginx;
 
@@ -40,6 +40,23 @@ impl Nginx{
     pub fn configure(){
         println!("Writing /etc/nginx/conf.d/lemp.conf");
         file_put_contents("/etc/nginx/conf.d/lemp.conf", include_str!("../../templates/nginx/config.conf"));
+
+
+
+        println!("Rewriting nginx default config");
+
+        if !file_exists("/etc/nginx/sites-available/default.original"){
+            shell_exec("mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.original");
+        }
+
+        file_put_contents("/etc/nginx/sites-available/default", include_str!("../../templates/nginx/default.conf"));
+
+        shell_exec("mkdir -p /usr/share/nginx/html");
+
+        file_put_contents("/usr/share/nginx/html/index.html", include_str!("../../templates/nginx/default-index.html"));
+
+       file_put_contents("/usr/share/nginx/html/phpinfo.php", include_str!("../../templates/nginx/phpinfo.php"));
+
         Self::restart();
     }
 
