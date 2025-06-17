@@ -2,10 +2,11 @@ use app::require_sudo;
 use clap::{Parser, Subcommand};
 
 
-mod upgrade;
-mod publish;
 mod config;
 mod install;
+mod maintenance_mode;
+mod upgrade;
+mod publish;
 
 
 #[derive(Parser)]
@@ -24,6 +25,9 @@ enum Commands {
 
     #[command(about = "Config major settings in sever")]
     Config(config::ConfigArgs),
+
+    #[command(about = "Manage maintenance mode for domain")]
+    MaintenanceMode(maintenance_mode::Args),
 
     #[command(about = "Upgrade lemp")]
     Upgrade(upgrade::UpgradeArgs),
@@ -46,6 +50,8 @@ async fn main() {
         Commands::Install(args) => install::action(args),
 
         Commands::Config(args) => config::action(args.command.unwrap()),
+
+        Commands::MaintenanceMode(args) => maintenance_mode::action(args),
 
         Commands::Upgrade(args) => upgrade::action(args),
         

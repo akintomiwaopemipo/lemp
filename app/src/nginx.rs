@@ -1,5 +1,7 @@
 use util::{file_exists, file_put_contents, shell_exec};
 
+use crate::maintenance_mode::MaintenanceMode;
+
 pub struct Nginx;
 
 impl Nginx{
@@ -57,13 +59,15 @@ impl Nginx{
 
        file_put_contents("/usr/share/nginx/html/phpinfo.php", include_str!("../../templates/nginx/phpinfo.php"));
 
+       MaintenanceMode::create_root();
+
         Self::restart();
     }
 
 
     pub fn restart(){
+        println!("Restarting nginx service");
         shell_exec("sudo systemctl restart nginx");
-        println!("Restarted nginx service");
     }
 
 }

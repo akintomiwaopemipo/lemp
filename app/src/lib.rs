@@ -6,6 +6,7 @@ pub mod nginx;
 pub mod mariadb;
 pub mod php;
 pub mod phpmyadmin;
+pub mod maintenance_mode;
 
 
 pub fn require_sudo(){
