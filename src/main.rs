@@ -6,7 +6,6 @@ mod config;
 mod install;
 mod maintenance_mode;
 mod upgrade;
-mod publish;
 
 
 #[derive(Parser)]
@@ -30,10 +29,7 @@ enum Commands {
     MaintenanceMode(maintenance_mode::Args),
 
     #[command(about = "Upgrade lemp")]
-    Upgrade(upgrade::UpgradeArgs),
-
-    #[command(about = "Publish lemp")]
-    Publish(publish::PublishArgs)
+    Upgrade(upgrade::UpgradeArgs)
 
 }
 
@@ -53,9 +49,7 @@ async fn main() {
 
         Commands::MaintenanceMode(args) => maintenance_mode::action(args),
 
-        Commands::Upgrade(args) => upgrade::action(args),
-        
-        Commands::Publish(args) => publish::action(args)
+        Commands::Upgrade(args) => upgrade::action(args)
 
     }
     
