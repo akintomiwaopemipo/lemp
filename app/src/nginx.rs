@@ -76,8 +76,8 @@ impl Nginx{
 
 
     pub fn reload(){
-        println!("Reloading nginx service");
         shell_exec("sudo systemctl reload nginx");
+        println!("Reloaded nginx service");
     }
 
 
