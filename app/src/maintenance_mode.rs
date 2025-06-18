@@ -56,7 +56,7 @@ impl MaintenanceMode{
 
         println!("Turned on maintenance mode for {domain_name}");
 
-        Nginx::restart();
+        Nginx::reload();
 
     }
 
@@ -78,7 +78,7 @@ impl MaintenanceMode{
 
         println!("Turned off maintenance mode for {domain_name}");
 
-        Nginx::restart();        
+        Nginx::reload();        
 
     }
 

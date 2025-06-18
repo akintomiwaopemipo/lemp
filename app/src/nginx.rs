@@ -74,6 +74,13 @@ impl Nginx{
     }
 
 
+
+    pub fn reload(){
+        println!("Reloading nginx service");
+        shell_exec("sudo systemctl reload nginx");
+    }
+
+
     pub fn enabled_domains() -> Vec<String> {
         let sites_enabled_path = "/etc/nginx/sites-enabled";
         let mut domains = Vec::new();
