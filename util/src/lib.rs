@@ -1,5 +1,6 @@
 use std::fs;
 use std::iter::FromIterator;
+use reqwest::header;
 use serde_json::Value;
 use serde::Serialize;
 use im;
@@ -144,8 +145,21 @@ pub fn serde_to_hashmap(serde: &serde_json::Value)->im::HashMap<String,String>{
 }
 
 
-pub fn fetch_url(url: &str)->String{
-    shell_exec_as_string(&format!("curl --location --request GET '{}'",url))
+pub async fn fetch_url(url: &str)-> eyre::Result<String>{
+
+    let mut headers = header::HeaderMap::new();
+        
+    headers.insert(header::USER_AGENT, header::HeaderValue::from_static("Mozilla/5.0"));
+
+    
+    let client = reqwest::Client::builder()
+        .default_headers(headers)
+        .build()?;
+
+    let request = client.request(reqwest::Method::GET, url);
+
+    let response = request.send().await?;
+    Ok(response.text().await?)
 }
 
 
@@ -664,4 +678,16 @@ pub fn print_header_block(title: &str){
     println!("### ----------------------------------------------------------");
     println!("###              {title}");
     println!("### ----------------------------------------------------------");
+}
+
+
+
+pub fn pretty_print_version(bin: &str){
+    println!();
+
+    println!("$ {bin} --version");
+
+    shell_exec(&format!("{bin} --version"));
+
+    println!();
 }

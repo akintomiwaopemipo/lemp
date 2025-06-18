@@ -29,7 +29,7 @@ enum Commands {
     MaintenanceMode(maintenance_mode::Args),
 
     #[command(about = "Upgrade lemp")]
-    Upgrade(upgrade::UpgradeArgs)
+    Upgrade(upgrade::Args)
 
 }
 
@@ -49,7 +49,7 @@ async fn main() {
 
         Commands::MaintenanceMode(args) => maintenance_mode::action(args),
 
-        Commands::Upgrade(args) => upgrade::action(args)
+        Commands::Upgrade(args) => upgrade::action(args).await
 
     }
     
