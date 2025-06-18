@@ -4,6 +4,7 @@ use clap::{Parser, Subcommand};
 
 mod config;
 mod install;
+mod domains;
 mod maintenance_mode;
 mod upgrade;
 
@@ -24,6 +25,9 @@ enum Commands {
 
     #[command(about = "Config major settings in sever")]
     Config(config::ConfigArgs),
+
+    #[command(about = "Show all enabled domains in lemp nginx server")]
+    Domains(domains::Args),
 
     #[command(about = "Manage maintenance mode for domain")]
     MaintenanceMode(maintenance_mode::Args),
@@ -46,6 +50,8 @@ async fn main() {
         Commands::Install(args) => install::action(args),
 
         Commands::Config(args) => config::action(args.command.unwrap()),
+
+        Commands::Domains(args) => domains::action(args),
 
         Commands::MaintenanceMode(args) => maintenance_mode::action(args),
 
